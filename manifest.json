@@ -7,9 +7,6 @@
     "activeTab",
     "scripting"
   ],
-  "optional_permissions": [
-    "shape-detection"
-  ],
   "host_permissions": [
     "<all_urls>"
   ],
