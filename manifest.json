@@ -1,18 +1,28 @@
 {
   "manifest_version": 3,
   "name": "QR Code Scanner",
-  "version": "1.0",
-  "description": "Scan QR codes on any webpage using Ctrl+F7",
-  "permissions": ["activeTab", "tabs", "scripting"],
+  "version": "1.1",
+  "description": "Scan QR codes on any webpage using Ctrl+Shift+Q",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "optional_permissions": [
+    "shape-detection"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content.js"],
-      "css": []
+      "js": ["jsQR.js", "content.js"],
+      "run_at": "document_idle"
     }
   ],
-  "background": { "service_worker": "background.js" },
-
+  "background": {
+    "service_worker": "background.js"
+  },
   "commands": {
     "scan-qr": {
       "suggested_key": {
