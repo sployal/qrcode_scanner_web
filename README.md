@@ -17,7 +17,7 @@ Scan QR codes on any webpage instantly using a simple keyboard shortcut.
 
 
 <p align="center">
-	<img src="images/image%201.png" alt="Screenshot showing how to enable Developer Mode and load the unpacked extension in the browser extensions page" width="500" />
+	<img src="images/image%201.png" alt="Screenshot showing how to enable Developer Mode and load the unpacked extension in the browser extensions page" />
 </p>
 <p align="center"><em>Figure 1: Enable Developer Mode and load the extension</em></p>
 
@@ -29,7 +29,7 @@ Scan QR codes on any webpage instantly using a simple keyboard shortcut.
 
 
 <p align="center">
-	<img src="images/image%202.png" alt="Screenshot showing the QR code scanner overlay and selection box on a webpage" width="500" />
+	<img src="images/image%202.png" alt="Screenshot showing the QR code scanner overlay and selection box on a webpage" />
 </p>
 <p align="center"><em>Figure 2: QR code scanner overlay in action</em></p>
 
