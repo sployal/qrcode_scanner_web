@@ -235,12 +235,51 @@ function showResult(text) {
       copyBtn.textContent = 'Copy failed';
     });
   });
+
+  // Add "Open Link" button to open decoded QR codes in a new tab
+  const openBtn = document.createElement('button');
+  openBtn.textContent = 'Open Link';
+  openBtn.style.cssText = 'flex: 1; padding: 10px; background: #2196F3; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: bold;';
+  openBtn.onmouseover = () => openBtn.style.background = '#1976D2';
+  openBtn.onmouseout = () => openBtn.style.background = '#2196F3';
+
+  openBtn.addEventListener('click', function() {
+    // Trim and normalize the text
+    let url = String(text).trim();
+
+    // Quick detection of URL-like text. Accepts http(s), protocol-less hostnames like 'example.com', mailto:, tel:, data: etc.
+    const hasProtocol = /^(https?:\/\/|ftp:\/\/|mailto:|tel:|data:|file:|\/\/)/i.test(url);
+    const looksLikeDomain = /^([\w-]+\.)+[\w-]{2,}(\/.*)?$/i.test(url);
+
+    if (!hasProtocol) {
+      if (looksLikeDomain) {
+        url = 'https://' + url; // assume https when it looks like a hostname
+      } else {
+        // Not a URL we can safely open
+        alert('Decoded text is not a valid/known URL: "' + url + '"');
+        return;
+      }
+    }
+
+    try {
+      const validated = new URL(url, window.location.href);
+
+      // Open in a new tab (user-initiated click) and close popup shortly after
+      window.open(validated.toString(), '_blank', 'noopener,noreferrer');
+      openBtn.textContent = 'Opening...';
+      setTimeout(() => popup.remove(), 700);
+    } catch (err) {
+      console.error('Invalid URL', err);
+      alert('Unable to open this link: ' + url);
+    }
+  });
   
   closeBtn.addEventListener('click', function() {
     popup.remove();
   });
   
   buttonDiv.appendChild(copyBtn);
+  buttonDiv.appendChild(openBtn);
   buttonDiv.appendChild(closeBtn);
   
   popup.appendChild(heading);
